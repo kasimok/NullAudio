@@ -3,7 +3,7 @@ Build a virtual audio device by creating a custom driver plug-in.
 
 ## Overview
 This sample shows how to create a minimal Audio Server plug-in. Written in standard C, the sample provides the minimal implementation you need to publish a single, functioning audio device to the system. The audio device provides the following features:
-- Configurable device master volume, muting, and data sources
+- Configurable device primary volume, muting, and data sources
 - 44.1 kHz and 48 kHz sample rates
 - Two channels of audio I/O in 32-bit, floating point, linear PCM format
 
