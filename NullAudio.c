@@ -174,7 +174,17 @@ static UInt32								gDataDestination_PlayThru_Master_Value	= 0;
 #pragma mark Prototypes
 
 //	Entry points for the COM methods
+//  Component Object Model (COM) is a binary-interface standard for software components introduced by Microsoft in 1993.
+//	All COM components are registered with the system upon installation. If a programmer wants to use a certain component, he needs to:
+
+//	* Make sure the component is installed at a reachable location. Most of the time it is on the system of the running application, but COM+ also allows components to exist on remote computers.
+//	* Know the GUID of the given component. With this GUID, the client can then ask the system to instantiate the component (in C, the function to do this is called CoCreateInstance()). You can look in the registry under HKEY_CLASSES_ROOT\CLSID: each GUID in there is (most probably) an identifier for a COM component or interface, and the entries below that key tell the system how it should be instanciated.
+
 void*				NullAudio_Create(CFAllocatorRef inAllocator, CFUUIDRef inRequestedTypeUUID);
+/// QueryInterface allows calling code to get an implementation for a known interface. In COM, interfaces are referenced by GUIDs (also known as Interface Identifiers, IID). If an object implements several interfaces, that's how client code gets a reference to each of those interfaces. It acts as a sort of casting operator, if you will.
+/// @param inDriver function ptr
+/// @param inUUID UUID of interfaces,
+/// @param outInterface outInterface description
 static HRESULT		NullAudio_QueryInterface(void* inDriver, REFIID inUUID, LPVOID* outInterface);
 static ULONG		NullAudio_AddRef(void* inDriver);
 static ULONG		NullAudio_Release(void* inDriver);
@@ -1600,7 +1610,7 @@ static OSStatus	NullAudio_GetBoxPropertyData(AudioServerPlugInDriverRef inDriver
 			//	any 32 bit integer, but common values for this property are defined in
 			//	<CoreAudio/AudioHardwareBase.h>
 			FailWithAction(inDataSize < sizeof(UInt32), theAnswer = kAudioHardwareBadPropertySizeError, Done, "NullAudio_GetBoxPropertyData: not enough space for the return value of kAudioDevicePropertyTransportType for the box");
-			*((UInt32*)outData) = kAudioDeviceTransportTypeVirtual;
+			*((UInt32*)outData) = kAudioDeviceTransportTypeAggregate;
 			*outDataSize = sizeof(UInt32);
 			break;
 			
