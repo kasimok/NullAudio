@@ -99,6 +99,7 @@
 				2D7477A51578168D00412279 /* Sources */,
 				2D7477A61578168D00412279 /* Frameworks */,
 				2D46CA7A17D6ADC500049D4A /* Resources */,
+				F2DA8FE928BDEB1E000C7529 /* Install HAL */,
 			);
 			buildRules = (
 			);
@@ -151,6 +152,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F2DA8FE928BDEB1E000C7529 /* Install HAL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Install HAL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export SUDO_ASKPASS=~/askpass.sh\n# Uninstall any new driver leftovers\nsudo -A rm -rf /Library/Audio/Plug-Ins/HAL/NullAudio.driver/\n# Install the new driver\nsudo -A cp -f -r \"$BUILT_PRODUCTS_DIR/$FULL_PRODUCT_NAME\" /Library/Audio/Plug-Ins/HAL/\n# Restart CoreAudio\nsudo -A launchctl kickstart -k system/com.apple.audio.coreaudiod\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D7477A51578168D00412279 /* Sources */ = {
